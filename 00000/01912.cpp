@@ -5,32 +5,26 @@
 // https://www.acmicpc.net/problem/1912
 // 연속합
 
+#define max(a, b) ((a) > (b) ? (a) : (b))
+
 #include <stdio.h>
 
-int arr[100001];
+int v[100001];
+int d[100001];
 
 int main() {
-    int n, h = 0, t = 0, tmp = 0, ans = -1000, hTmp;
-
+    int n, ans;
     scanf("%d", &n);
 
     for (int i = 0; i < n; i++)
-        scanf("%d", &arr[i]);
+        scanf("%d", &v[i]);
 
-    while (t < n) {
-        tmp += arr[t];
-        hTmp = tmp;
+    ans = d[0] = v[0];
 
-        for (int i = h; i < t; i++) {
-            hTmp -= arr[i];
-            if (hTmp > tmp) {
-                h = i + 1;
-                tmp = hTmp;
-            }
-        }
-        if (ans < tmp)
-            ans = tmp;
-        t++;
+    for (int i = 1; i < n; i++) {
+        d[i] = max(d[i-1] + v[i], v[i]);
+        ans = max(ans, d[i]);
     }
+
     printf("%d", ans);
 }
