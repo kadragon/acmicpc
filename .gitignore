@@ -1,8 +1,12 @@
 # Project exclude paths
 /cmake-build-debug/
+/main.out.dSYM/
 .idea/*
+.vscode/*
 
 CMakeLists.txt
 main.cpp
+main.out
 
 input.txt
+
