@@ -42,3 +42,8 @@ int main() {
 
     printf("%d", c == 0 ? k - 1 : -1);
 }
+
+/**
+ * Reference
+ * https://murra.tistory.com/60
+ */
