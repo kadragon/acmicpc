@@ -91,3 +91,4 @@ CMakeLists.txt
 main.cpp
 
 input.txt
+main.out.*
