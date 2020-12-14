@@ -1,58 +1,36 @@
-//
-// Created by kangdonguk on 2020/03/06.
-//
-
 // https://www.acmicpc.net/problem/2108
 // 통계학
 
-#include <stdio.h>
+#include <algorithm>
+#include <cstdio>
 #include <math.h>
 
-int a[8001];
-
 int main() {
-    int n, t;
-    int sum = 0, max_i = 0, min = 4001, max = -4001;
-    int pre_ans = -1, mid_ans = -1, mid = 0;
-    bool flag = true;
+    int n, d[500001], c[8002] = {0}, pm = 0, a = 4001, b = 4001;
+    long long p = 0;
+
     scanf("%d", &n);
-
     for (int i = 0; i < n; i++) {
-        scanf("%d", &t);
-        a[t + 4000]++;
-        sum += t;
+        scanf("%d", d + i);
+        if (++c[d[i] + 4000] > pm)
+            pm = c[d[i] + 4000];
 
-        max_i = max_i < a[t + 4000] ? a[t + 4000] : max_i;
+        p += d[i];
     }
 
-    for (int i = 0; i < 8001; i++) {
-        if (a[i]) {
-            if (min == 4001)
-                min = i - 4000;
-
-            if (max_i == a[i] and flag) {
-                if (pre_ans != -1)
-                    flag = false;
-
-                pre_ans = i - 4000;
-            }
-
-            mid += a[i];
-            if (mid > n / 2 and mid_ans == -1)
-                mid_ans = i - 4000;
-
-            if (mid == n) {
-                max = i - 4000;
-                break;
-            }
+    for (int i = 0; i < 8002; i++)
+        if (c[i] == pm) {
+            if (i - 4000 < a) {
+                b = a;
+                a = i - 4000;
+            } else if (i - 4000 < b)
+                b = i - 4000;
         }
-    }
 
-    // 실수형일 경우 -0이 출력될 가능성이 존재한다.
-    printf("%d\n", (int) (floor((double) sum / n + 0.5)));
-    printf("%d\n", mid_ans);
-    printf("%d\n", pre_ans);
-    printf("%d", max - min);
+    std::sort(d, d + n);
 
-    return 0;
+    printf("%d\n", (int)floor(p / (double)n + 0.5));
+    printf("%d\n", d[n / 2]);
+    printf("%d\n", b == 4001 ? a : b);
+    printf("%d", d[n - 1] - d[0]);
 }
