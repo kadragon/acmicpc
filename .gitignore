@@ -88,7 +88,4 @@ Temporary Items
 /main.out.dSYM/
 
 CMakeLists.txt
-main.cpp
-
-input.txt
 main.out.*
